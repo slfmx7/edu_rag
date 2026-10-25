@@ -59,6 +59,18 @@ services:
     # 设置 Redis 密码为 1234
     command: redis-server --requirepass 1234
 
+  mysql:
+    container_name: edu-rag-mysql
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: "subjects_kg"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+
 networks:
   default:
     name: milvus-network

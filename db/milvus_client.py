@@ -290,6 +290,6 @@ if __name__ == "__main__":
     # operate_insert_entity()
     # operate_partition_insert_entity()
     # operate_query_base_entity()
-    # operate_complex_insert_data()
-    # operate_rrf_rank_search_data()
+    operate_complex_insert_data()
+    operate_rrf_rank_search_data()
     operate_weight_search_data()

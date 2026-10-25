@@ -3,7 +3,7 @@ import os
 
 # 日志为什么要输出到控制台的原因是,如果使用容器化docker部署不做任何处理（不添加挂载），
 # 日志会写在容器里面，当容器重启那么就会丢失日志数据，因此输出到控制台是最好的选择
-def init_logging(log_name, log_file='./logging.log'):
+def init_logger(log_name, log_file='./logging.logger'):
 
     os.makedirs(os.path.dirname(log_file), exist_ok=True)
 
@@ -11,6 +11,8 @@ def init_logging(log_name, log_file='./logging.log'):
     # filename 文件存储目录
     # filemode 表示写入方式 a表示追加
     logger = logging.getLogger(log_name)
+    # 必须设置 logger 自身级别，否则默认继承 root 的 WARNING，debug/info 会被过滤掉
+    logger.setLevel(logging.DEBUG)
 
     # 同时打印到控制台
     consle_log=logging.StreamHandler()
@@ -29,10 +31,10 @@ def init_logging(log_name, log_file='./logging.log'):
         logger.addHandler(file_hd)
     return logger
 
-
+logger = init_logger('edu_rag', log_file='../logger/edu_rag.log')
 
 if __name__ == "__main__":
-    logger = init_logging('edu_rag', log_file='./edu_rag.log')
+    logger = init_logger('edu_rag', log_file='./edu_rag.log')
 
     # 记录不同级别的日志
     logger.debug("这是调试信息，通常用于开发")
